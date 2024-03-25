@@ -10,19 +10,23 @@ function round(currentSpeed) {
     return Math.ceil(currentSpeed / 5) * 5;
 }
 
+// Initialize a global variable to store total demerit points
+let totalPoints = 0;
+
 // Function to check the speed and deduct points
 function speedCheck(currentSpeed) {
     const speedLimit = 70;
     let points = 0;
-    if (currentSpeed <= speedLimit) {
-        return 'Ok';
-    } else {
+    if (currentSpeed > speedLimit) {
         points = (round(currentSpeed) - speedLimit) / 5;
-        if (points > 12) {
+        totalPoints += points; // Update total points
+        if (totalPoints > 12) {
             return "License suspended";
         } else {
-            return "Points: " + points;
+            return "Points: " + totalPoints;
         }
+    } else {
+        return 'Ok';
     }
 }
 
